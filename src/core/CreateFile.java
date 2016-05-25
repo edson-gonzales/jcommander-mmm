@@ -14,7 +14,9 @@ public class CreateFile {
     private String newFilePath;
 
     /**
-     * constructor of the class
+     * The constructor class we will use to create a new CreateFile object
+     *
+     * newPath it is an string that we will use to add the path location were we will create a new file
      */
     public CreateFile(String newPath)
     {
@@ -24,23 +26,26 @@ public class CreateFile {
     /**
      * This class create a file using a string for the new file name
      * and the Path with the location that will be used on the creation
+     *
+     * fileName is the string used for the name of the file we will create
+     * we will return a Boolean when the file is created and false is the file was not created
      */
-
-    public Boolean createNewFile(String filename) throws IOException {
+    public Boolean createNewFile(String fileName){
 
         Boolean fileCreated = true;
-        String fileCreatedName = filename;
-        String pathName = newFilePath+fileCreatedName;
+        String fileCreatedName = fileName;
+        String pathName = newFilePath + fileCreatedName;
         Path newPath = Paths.get(pathName);
 
-        Files.createDirectories(newPath.getParent());
-
         try {
+            Files.createDirectories(newPath.getParent());
             Files.createFile(newPath);
         } catch (FileAlreadyExistsException e) {
             System.err.println("already exists: " + e.getMessage());
             fileCreated =false;
 
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return fileCreated;
     }
