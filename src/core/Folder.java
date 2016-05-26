@@ -9,25 +9,37 @@ import java.util.ArrayList;
  */
 public class Folder extends Item {
 
-    public Folder (File file) {
-        super(file);
+    public Folder (File fileSystemItem) {
+        super(fileSystemItem);
     }
 
     /**
-     * List of files and folders that are on a path
+     * Returns a list of files and folders that are located on an absolute path.
+     *
+     * @param   workingPath an absolute path giving the base location of the files and folders.
+     * @return                the list of files an folders.
      */
-    public List<String> listFilesAndFolders(String directoryName)
+    public List<String> listFilesAndFolders(String workingPath)
     {
-        List<String> fileListed = new ArrayList<String>();
-        File directory = new File(directoryName);
+        List<String> filesListed = new ArrayList<String>();
 
-        //get all the files from a directory
-        File[] fullFileList = directory.listFiles();
+        try {
+            File directory = new File(workingPath);
 
-        for (File file : fullFileList){
-            fileListed.add(file.getName());
+            if (!directory.exists()) {
+                return filesListed;
+            }
+
+            File[] fullFileList = directory.listFiles();
+
+            for (File file : fullFileList){
+                filesListed.add(file.getName());
+            }
+
+        } catch (Exception exception) {
+            System.out.println("Error getting files and folders: " + exception.getMessage());
         }
 
-        return fileListed;
+        return filesListed;
     }
 }

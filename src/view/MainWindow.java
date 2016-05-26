@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Marcela Barrionuevo on 16/05/2016.
+ * Created by Marcela BARRIONEVO on 16/05/2016.
  */
 public class MainWindow extends JFrame {
 
@@ -13,6 +13,7 @@ public class MainWindow extends JFrame {
     private MenuBar menuBar;
     private ToolBar toolBar;
     private StatusBar statusBar;
+    private JSplitPane splitPane;
     private PanelContainer leftPanel;
     private PanelContainer rightPanel;
 
@@ -20,30 +21,34 @@ public class MainWindow extends JFrame {
 
         tool = Toolkit.getDefaultToolkit();
         dimension = tool.getScreenSize();
-        menuBar = new MenuBar();
-        toolBar = new ToolBar();
-        statusBar = new StatusBar();
-        leftPanel = new PanelContainer("");
-        rightPanel = new PanelContainer("");
 
         initComponents();
+
+        customizeComponents();
+
+        addComponents();
     }
 
     private void initComponents() {
+        menuBar = new MenuBar();
+        toolBar = new ToolBar();
+        statusBar = new StatusBar();
+
         setTitle("JCommander - Jala");
         setSize(dimension.width, dimension.height);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setDefaultLookAndFeelDecorated(true);
         setIconImage(tool.getImage(MainWindow.class.getResource("../image/icon.png")));
         setLayout(new BorderLayout());
-
-        // Add components in the main window
         setJMenuBar(menuBar);
-        add(toolBar, BorderLayout.PAGE_START);
-        add(statusBar, BorderLayout.SOUTH);
 
         // Create both panels
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, rightPanel);
+        leftPanel = new PanelContainer("");
+        rightPanel = new PanelContainer("");
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, rightPanel);
+    }
+
+    private void customizeComponents() {
         splitPane.setOneTouchExpandable(true);
         splitPane.setResizeWeight(0.5);
         splitPane.setContinuousLayout(true);
@@ -52,6 +57,11 @@ public class MainWindow extends JFrame {
         Dimension minimumSize = new Dimension(dimension.width/4, dimension.height/4);
         leftPanel.setMinimumSize(minimumSize);
         rightPanel.setMinimumSize(minimumSize);
+    }
+
+    private void addComponents() {
+        add(toolBar, BorderLayout.PAGE_START);
+        add(statusBar, BorderLayout.SOUTH);
         add(splitPane, BorderLayout.CENTER);
     }
 }

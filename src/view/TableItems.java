@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Marcela Barrionuevo on 16/05/2016.
+ * Created by Marcela BARRIONEVO on 16/05/2016.
  */
 public class TableItems extends JTable {
 

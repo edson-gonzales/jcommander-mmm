@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 /**
- * Created by Marcela Barrionuevo on 16/05/2016.
+ * Created by Marcela BARRIONEVO on 16/05/2016.
  */
 public class MenuBar extends JMenuBar implements ActionListener {
 
@@ -24,38 +24,51 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
     public MenuBar() {
         initComponents();
+
+        customizeComponents();
+
+        addComponents();
     }
 
     private void initComponents() {
 
         files = new JMenu("Files");
-        files.setMnemonic(KeyEvent.VK_F);
         mark = new JMenu("Mark");
-        mark.setMnemonic(KeyEvent.VK_M);
         commands = new JMenu("Commands");
-        commands.setMnemonic(KeyEvent.VK_C);
         show = new JMenu("Show");
-        show.setMnemonic(KeyEvent.VK_W);
         configuration = new JMenu("Configuration");
-        configuration.setMnemonic(KeyEvent.VK_O);
         help = new JMenu("Help");
-        help.setMnemonic(KeyEvent.VK_H);
 
         filesChangeAttrib = new JMenuItem("Change Attributes", new ImageIcon(MenuBar.class.getResource("../image/iconAttributes.gif")));
+        filesCompareContent = new JMenuItem("Compare By Content", new ImageIcon(MenuBar.class.getResource("../image/iconCompare.png")));
+        filesProperties = new JMenuItem("Properties", new ImageIcon(MenuBar.class.getResource("../image/iconProperties.gif")));
+        filesQuit = new JMenuItem("Quit", new ImageIcon(MenuBar.class.getResource("../image/iconQuit.png")));
+    }
+
+    private void customizeComponents() {
+        files.setMnemonic(KeyEvent.VK_F);
+        mark.setMnemonic(KeyEvent.VK_M);
+        commands.setMnemonic(KeyEvent.VK_C);
+        show.setMnemonic(KeyEvent.VK_W);
+        configuration.setMnemonic(KeyEvent.VK_O);
+        help.setMnemonic(KeyEvent.VK_H);
+
         filesChangeAttrib.addActionListener(this);
         filesChangeAttrib.setMnemonic(KeyEvent.VK_A);
         filesChangeAttrib.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.ALT_MASK));
         filesChangeAttrib.getAccessibleContext().setAccessibleDescription("Change attributes in selected folders/files");
-        filesCompareContent = new JMenuItem("Compare By Content", new ImageIcon(MenuBar.class.getResource("../image/iconCompare.png")));
+
         filesCompareContent.addActionListener(this);
         filesCompareContent.setMnemonic(KeyEvent.VK_T);
-        filesProperties = new JMenuItem("Properties", new ImageIcon(MenuBar.class.getResource("../image/iconProperties.gif")));
+
         filesProperties.addActionListener(this);
         filesProperties.setMnemonic(KeyEvent.VK_P);
-        filesQuit = new JMenuItem("Quit", new ImageIcon(MenuBar.class.getResource("../image/iconQuit.png")));
+
         filesQuit.addActionListener(this);
         filesQuit.setMnemonic(KeyEvent.VK_Q);
+    }
 
+    private void addComponents() {
         files.add(filesChangeAttrib);
         files.add(filesCompareContent);
         files.add(filesProperties);

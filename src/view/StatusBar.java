@@ -5,7 +5,7 @@ import javax.swing.border.BevelBorder;
 import java.awt.*;
 
 /**
- * Created by Marcela Barrionuevo on 17/05/2016.
+ * Created by Marcela BARRIONEVO on 17/05/2016.
  */
 public class StatusBar extends JPanel {
 

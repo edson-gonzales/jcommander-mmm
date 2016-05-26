@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Marcela Barrionuevo on 18/05/2016.
+ * Created by TANIA BARRIONEVO on 18/05/2016.
  */
 public class TableSortedModel extends AbstractTableModel {
 
@@ -32,17 +32,32 @@ public class TableSortedModel extends AbstractTableModel {
 
         for (int index = 0; index < items.size(); index++) {
             Item item = items.get(index);
-            data[index] = new Object[] {item.getName(), item.getType(), item.getSize(), item.getLastModified(), item.getFilePermissions()};
+            data[index] = new Object[] { item.getName(),
+                    item.getType(),
+                    item.getSize(),
+                    item.getLastModified(),
+                    item.getFilePermissions()};
+
         }
     }
 
+    /**
+     * Returns a list of files and folders that are located on an absolute path.
+     *
+     * @param   workingPath   an absolute path giving the base location of the files and folders.
+     * @return                the list of files an folders.
+     */
     private List<Item> populateItems(String workingPath) {
         List<Item> items = new ArrayList<Item>();
 
-        // Get all the folders/files
-        File fileSystem = new File(workingPath);
+        try {
+            // Get all the folders/files
+            File fileSystem = new File(workingPath);
 
-        if (fileSystem.exists()) {
+            if (fileSystem == null || !fileSystem.exists()) {
+                return items;
+            }
+
             File[] fullFileList = fileSystem.listFiles();
 
             for (File file : fullFileList){
@@ -56,6 +71,8 @@ public class TableSortedModel extends AbstractTableModel {
 
                 items.add(item);
             }
+        } catch (Exception exception) {
+            System.out.println("Error getting files and folders: " + exception.getMessage());
         }
 
         return items;
@@ -92,7 +109,13 @@ public class TableSortedModel extends AbstractTableModel {
      * editable.
      */
     public boolean isCellEditable(int row, int col) {
+        //Note that the data/cell address is constant,
+        //no matter where the cell appears onscreen.
+        if (col < 2) {
+            return true;
+        } else {
             return false;
+        }
     }
 
     /*
