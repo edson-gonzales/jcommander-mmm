@@ -1,38 +1,46 @@
 package view;
 
-import core.Folder;
 import core.Item;
+import utils.ItemUtilities;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by TANIA BARRIONEVO on 18/05/2016.
+ * Created by Marcela Barrionuevo on 18/05/2016.
  */
 public class TableSortedModel extends AbstractTableModel {
 
     private List<Item> items;
-    private final String[] columnNames = {"<html><strong>Name</strong></html>",
+    private final String[] columnNames = {"", "<html><strong>Name</strong></html>",
             "<html><strong>Ext</strong></html>", "<html><strong>Size</strong></html>",
             "<html><strong>Date</strong></html>", "<html><strong>Attr</strong></html>"};
-    private final Class[] columnTypes = new Class[]{String.class, String.class, String.class, Date.class, String.class};
+    private final Class[] columnTypes = new Class[]{ImageIcon.class, String.class,
+            String.class, String.class,
+            Date.class, String.class};
     private Object[][] data;
 
     public TableSortedModel(String workingPath) {
-        items = populateItems(workingPath);
+        items = ItemUtilities.populateItems(workingPath);
+        // We add an extra row to have the link to up level
+        data = new Object[items.size() + 1][columnNames.length];
 
         populateDataTable();
     }
 
     private void populateDataTable() {
-        data = new Object[items.size()][columnNames.length];
+
+        // Add th first extra row
+        data[0] = new Object[] {new ImageIcon(TableSortedModel.class.getResource("../image/upLevel.png")),
+                "[..]", "", "", new Date(), ""};
 
         for (int index = 0; index < items.size(); index++) {
             Item item = items.get(index);
-            data[index] = new Object[] { item.getName(),
+            data[index + 1] = new Object[] {
+                    ItemUtilities.getImageIcon(item.getType()),
+                    item.getName(),
                     item.getType(),
                     item.getSize(),
                     item.getLastModified(),
@@ -41,88 +49,50 @@ public class TableSortedModel extends AbstractTableModel {
         }
     }
 
-    /**
-     * Returns a list of files and folders that are located on an absolute path.
-     *
-     * @param   workingPath   an absolute path giving the base location of the files and folders.
-     * @return                the list of files an folders.
-     */
-    private List<Item> populateItems(String workingPath) {
-        List<Item> items = new ArrayList<Item>();
-
-        try {
-            // Get all the folders/files
-            File fileSystem = new File(workingPath);
-
-            if (fileSystem == null || !fileSystem.exists()) {
-                return items;
-            }
-
-            File[] fullFileList = fileSystem.listFiles();
-
-            for (File file : fullFileList){
-
-                Item item;
-                if (file.isDirectory()) {
-                    item = new Folder(file);
-                } else {
-                    item = new core.File(file);
-                }
-
-                items.add(item);
-            }
-        } catch (Exception exception) {
-            System.out.println("Error getting files and folders: " + exception.getMessage());
-        }
-
-        return items;
-    }
-
+    @Override
     public int getColumnCount() {
+
         return columnNames.length;
     }
 
+    @Override
     public int getRowCount() {
+
         return data.length;
     }
 
-    public String getColumnName(int col) {
-        return columnNames[col];
+    @Override
+    public String getColumnName(int columnIndex) {
+
+        return columnNames[columnIndex];
     }
 
+    @Override
     public Object getValueAt(int row, int col) {
+
         return data[row][col];
     }
 
-    /*
-     * JTable uses this method to determine the default renderer/
-     * editor for each cell.  If we didn't implement this method,
-     * then the last column would contain text ("true"/"false"),
-     * rather than a check box.
-     */
+    @Override
     public Class getColumnClass(int columnIndex) {
+
         return columnTypes[columnIndex];
     }
 
-    /*
-     * Don't need to implement this method unless your table's
-     * editable.
-     */
+    @Override
     public boolean isCellEditable(int row, int col) {
         //Note that the data/cell address is constant,
         //no matter where the cell appears onscreen.
-        if (col < 2) {
+        if (col > 0 && col < 3) {
             return true;
         } else {
             return false;
         }
     }
 
-    /*
-     * Don't need to implement this method unless your table's
-     * data can change.
-     */
+    @Override
     public void setValueAt(Object value, int row, int col) {
+
         data[row][col] = value;
         fireTableCellUpdated(row, col);
     }

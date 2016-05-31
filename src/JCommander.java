@@ -3,7 +3,7 @@ import view.MainWindow;
 import javax.swing.UIManager;
 
 /**
- * Created by Marcela Barrionuevo on 16/05/2016.
+ * Created by Marcela BARRIONEVO on 16/05/2016.
  */
 public class JCommander {
 
@@ -11,10 +11,10 @@ public class JCommander {
     {
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (Exception exception) {
+            System.out.println("Error in look an feel: " + exception.getMessage());
         }
-        catch (Exception e) {
-            //JOptionPane.showMessageDialog(null,"Error al intentar cargar L&F");
-        }
+
         MainWindow mainWindow = new MainWindow();
         mainWindow.setVisible(true);
     }
