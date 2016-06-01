@@ -7,19 +7,24 @@ import java.util.ArrayList;
 /**
  * Created by Marcelo Loayza on 17/05/2016.
  */
-public class Folder extends Item {
+public class Folder{
 
-    public Folder (File file) {
-        super(file);
+
+    private String name;
+    private String pathLoacation;
+
+    public Folder (String fileName, String fileLocation) {
+        name = fileName;
+        pathLoacation = fileLocation;
     }
 
     /**
      * List of files and folders that are on a path
      */
-    public List<String> listFilesAndFolders(String directoryName)
+    public List<String> listFilesAndFolders(String directoryFullFileName)
     {
         List<String> fileListed = new ArrayList<String>();
-        File directory = new File(directoryName);
+        File directory = new File(directoryFullFileName);
 
         //get all the files from a directory
         File[] fullFileList = directory.listFiles();
@@ -29,5 +34,9 @@ public class Folder extends Item {
         }
 
         return fileListed;
+    }
+
+    public String getLocation() {
+        return pathLoacation;
     }
 }

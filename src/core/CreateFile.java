@@ -16,20 +16,23 @@ public class CreateFile {
     /**
      * The constructor class we will use to create a new CreateFile object
      *
-     * newPath it is an string that we will use to add the path location were we will create a new file
+     * @param newPath it is an string that we will use to add the path location were we will create a new file
      */
     public CreateFile(String newPath)
     {
         newFilePath = newPath;
 
     }
+
+
     /**
      * This class create a file using a string for the new file name
      * and the Path with the location that will be used on the creation
      *
-     * fileName is the string used for the name of the file we will create
-     * we will return a Boolean when the file is created and false is the file was not created
+     * @param fileName is the string used for the name of the file we will create
+     * @return fileCreated it is a Boolean that returns true when the file is created and false is the file was not created
      */
+
     public Boolean createNewFile(String fileName){
 
         Boolean fileCreated = true;
