@@ -5,7 +5,7 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 
 /**
- * Created by Marcela BARRIONEVO on 16/05/2016.
+ * Created by Marcela Barrionuevo on 16/05/2016.
  */
 public class PanelContainer extends JPanel {
 
@@ -44,6 +44,11 @@ public class PanelContainer extends JPanel {
             TableItems tableItems = new TableItems(model);
             tableItems.setRowSorter(sorterModel);
             tableItems.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+
+
+            // tableItems.addMouseListener(new TableMouseListener(tableItems));
+
             scrollPane = new JScrollPane(tableItems);
         } else if (viewType.toUpperCase().equals("TREE")) {
             TreeItems treeItems = new TreeItems();
@@ -52,6 +57,7 @@ public class PanelContainer extends JPanel {
     }
 
     private void initComponents() {
+
         setLayout(new GridLayout(1, 1));
 
         jTabbedPane = new JTabbedPane();
@@ -60,6 +66,7 @@ public class PanelContainer extends JPanel {
     }
 
     private void addComponents() {
+
         panelItems.add(scrollPane, BorderLayout.CENTER);
 
         jTabbedPane.addTab("File System", panelItems);

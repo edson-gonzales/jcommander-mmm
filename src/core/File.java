@@ -1,7 +1,7 @@
 package core;
 
 /**
- * Created by TANIA BARRIONEVO on 18/05/2016.
+ * Created by Marcela Barrionuevo on 18/05/2016.
  */
 public class File extends Item {
 
