@@ -20,9 +20,9 @@ public class CreateFileUnitTest {
 
         String pathLocation = "c://test//";
         String testName = "testForCreate.txt";
-        CreateFile newFileForTest = new CreateFile(pathLocation);
+        CreateFile newFileForTest = new CreateFile(pathLocation, testName);
 
-        assertTrue(newFileForTest.createNewFile(testName));
+        assertTrue(newFileForTest.createNewFile());
 
     }
 

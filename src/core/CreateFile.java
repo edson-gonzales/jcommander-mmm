@@ -12,32 +12,30 @@ import java.nio.file.Paths;
 public class CreateFile {
 
     private String newFilePath;
+    private String fileCreatedName;
 
     /**
      * The constructor class we will use to create a new CreateFile object
      *
      * @param newPath it is an string that we will use to add the path location were we will create a new file
+     * @param fileName is the string used for the name of the file we will create
      */
-    public CreateFile(String newPath)
+    public CreateFile(String newPath, String fileName)
     {
         newFilePath = newPath;
-
+        fileCreatedName = fileName;
     }
-
 
     /**
      * This class create a file using a string for the new file name
      * and the Path with the location that will be used on the creation
      *
-     * @param fileName is the string used for the name of the file we will create
      * @return fileCreated it is a Boolean that returns true when the file is created and false is the file was not created
      */
-
-    public Boolean createNewFile(String fileName){
+    public Boolean createNewFile(){
 
         Boolean fileCreated = true;
-        String fileCreatedName = fileName;
-        String pathName = newFilePath + fileCreatedName;
+        String pathName = newFilePath +"\\" + fileCreatedName;
         Path newPath = Paths.get(pathName);
 
         try {
