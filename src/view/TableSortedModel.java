@@ -16,10 +16,11 @@ public class TableSortedModel extends AbstractTableModel {
     private List<Item> items;
     private final String[] columnNames = {"", "<html><strong>Name</strong></html>",
             "<html><strong>Ext</strong></html>", "<html><strong>Size</strong></html>",
-            "<html><strong>Date</strong></html>", "<html><strong>Attr</strong></html>"};
+            "<html><strong>Date</strong></html>", "<html><strong>Attr</strong></html>",
+            "<html><strong>Full Path</strong></html>"};
     private final Class[] columnTypes = new Class[]{ImageIcon.class, String.class,
             String.class, String.class,
-            Date.class, String.class};
+            Date.class, String.class, String.class};
     private Object[][] data;
 
     public TableSortedModel(String workingPath) {
@@ -34,7 +35,7 @@ public class TableSortedModel extends AbstractTableModel {
 
         // Add th first extra row
         data[0] = new Object[] {new ImageIcon(TableSortedModel.class.getResource("../image/upLevel.png")),
-                "[..]", "", "", new Date(), ""};
+                "[..]", "", "", new Date(), "", ""};
 
         for (int index = 0; index < items.size(); index++) {
             Item item = items.get(index);
@@ -44,8 +45,8 @@ public class TableSortedModel extends AbstractTableModel {
                     item.getType(),
                     item.getSize(),
                     item.getLastModified(),
-                    item.getFilePermissions()};
-
+                    item.getFilePermissions(),
+                    item.getLocation()};
         }
     }
 

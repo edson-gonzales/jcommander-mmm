@@ -34,13 +34,13 @@ public class MainWindow extends JFrame {
         toolBar = new ToolBar();
         statusBar = new StatusBar();
 
-        setTitle("JCommander - Jala");
-        setSize(dimension.width, dimension.height);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setDefaultLookAndFeelDecorated(true);
-        setIconImage(tool.getImage(MainWindow.class.getResource("../image/icon.png")));
-        setLayout(new BorderLayout());
-        setJMenuBar(menuBar);
+        this.setTitle("JCommander - Jala");
+        this.setSize(dimension.width, dimension.height);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultLookAndFeelDecorated(true);
+        this.setIconImage(tool.getImage(MainWindow.class.getResource("../image/icon.png")));
+        this.setLayout(new BorderLayout());
+        this.setJMenuBar(menuBar);
 
         // Create both panels
         leftPanel = new PanelContainer("");
