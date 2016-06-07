@@ -45,10 +45,10 @@ public class PanelContainer extends JPanel {
             tableItems.setRowSorter(sorterModel);
             tableItems.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
-
-
-            // tableItems.addMouseListener(new TableMouseListener(tableItems));
-
+            // Hide the last column
+            int columnIndex = 6; // Full Path
+            tableItems.getColumnModel().getColumn(columnIndex).setMinWidth(0);
+            tableItems.getColumnModel().getColumn(columnIndex).setMaxWidth(0);
             scrollPane = new JScrollPane(tableItems);
         } else if (viewType.toUpperCase().equals("TREE")) {
             TreeItems treeItems = new TreeItems();

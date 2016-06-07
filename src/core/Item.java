@@ -3,6 +3,7 @@ package core;
 import commands.Command;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -12,6 +13,7 @@ public class Item {
 
     private File fileSystemItem;
     private String name;
+    private String fullName;
     private String location;
     private String type;
     private String fileSize;
@@ -50,7 +52,7 @@ public class Item {
     public String getLocation() {
 
         if (location == null || location.trim().equals("")) {
-            location = fileSystemItem.getPath();
+            location = fileSystemItem.getAbsolutePath();
         }
 
         return location;
@@ -82,6 +84,13 @@ public class Item {
         return fileSize;
     }
 
+    public String getSize(FileSizeType sizeType) {
+        FormatterSize formatter = new FormatterSize(fileSystemItem.length());
+        String fileSize = formatter.getFileSize(sizeType);
+
+        return fileSize;
+    }
+
     public Date getLastModified() {
 
         if (lastModified == null) {
@@ -99,5 +108,62 @@ public class Item {
         }
 
         return filePermissions;
+    }
+
+    public String getFullName() {
+
+        if (fullName == null) {
+            fullName = fileSystemItem.getName();
+        }
+
+        return fullName;
+    }
+
+    public boolean getReadOnly() {
+        return !fileSystemItem.canWrite();
+    }
+
+    public void setReadOnly(boolean value) {
+
+        if (getReadOnly() != value) {
+            String newValue = (value)? "+r": "-r";
+            String cmd1[] = {"attrib", newValue, getLocation()};
+
+            try {
+                Runtime.getRuntime().exec(cmd1);
+            } catch (IOException exception) {
+
+                if (value) {
+                    fileSystemItem.setReadOnly();
+                } else {
+                    fileSystemItem.setWritable(true);
+                }
+
+                System.out.println("Error setting new hidden file attribute: " + exception.getMessage());
+            }
+        }
+    }
+
+    public boolean getHidden() {
+        return fileSystemItem.isHidden();
+    }
+
+    /**
+     * Setting the hidden attribute just for Windows Operating System
+     * @param value    the new value of hidden file attribute
+     */
+    public void setHidden(boolean value) {
+
+        if (getHidden() != value)
+        {
+            String newValue = (value)? "+h": "-h";
+            String cmd1[] = {"attrib", newValue, getLocation()};
+
+            try {
+                Runtime.getRuntime().exec(cmd1);
+            } catch (IOException exception) {
+                System.out.println("Error setting new hidden file attribute: " + exception.getMessage());
+            }
+        }
     }
 }
