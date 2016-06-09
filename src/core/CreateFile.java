@@ -5,6 +5,7 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.io.File;
 
 /**
  * Created by Marcelo loayza on 22/05/2016.
@@ -22,8 +23,8 @@ public class CreateFile {
      */
     public CreateFile(String newPath, String fileName)
     {
-        newFilePath = newPath;
-        fileCreatedName = fileName;
+        this.newFilePath = newPath;
+        this.fileCreatedName = fileName;
     }
 
     /**
@@ -35,7 +36,7 @@ public class CreateFile {
     public Boolean createNewFile(){
 
         Boolean fileCreated = true;
-        String pathName = newFilePath +"\\" + fileCreatedName;
+        String pathName = newFilePath + File.separator + fileCreatedName;
         Path newPath = Paths.get(pathName);
 
         try {
@@ -43,7 +44,7 @@ public class CreateFile {
             Files.createFile(newPath);
         } catch (FileAlreadyExistsException e) {
             System.err.println("already exists: " + e.getMessage());
-            fileCreated =false;
+            fileCreated = false;
 
         } catch (IOException e) {
             e.printStackTrace();

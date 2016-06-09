@@ -39,12 +39,12 @@ public class CreateFileButton extends JPanel {
         NewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String FileName = JOptionPane.showInputDialog(CreateFileFrame,
+                String fileName = JOptionPane.showInputDialog(CreateFileFrame,
                         "new file name", null);
-                if(FileName != null )
+                if(fileName != null )
                 {
-                    CreateFile newFileForTest = new CreateFile(workingPath, FileName);
-                    newFileForTest.createNewFile();
+                    CreateFile newFileToCreate = new CreateFile(workingPath, fileName);
+                    newFileToCreate.createNewFile();
                 }
             }
         });
