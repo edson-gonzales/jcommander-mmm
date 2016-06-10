@@ -15,6 +15,7 @@ public class SearchFileOnAPath {
     /**
      * this method search files that match with a work
      *
+     *
      * @param directoryPath it is the path of the directory on we will search the files
      * @param fileToSearch this the file name we will search on the directory
      */

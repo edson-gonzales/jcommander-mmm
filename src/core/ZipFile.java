@@ -15,6 +15,7 @@ public class ZipFile {
     /**
      * this is a method will be used to compress files on Zip
      *
+     *
      * @param fileListed it is the list with the files that will be compress
      * @param ZipName this is the name that will be used to create the zip file
      */
