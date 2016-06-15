@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Marcela Barriouevo on 16/05/2016.
+ * Created by Marcela BARRIONEVO on 16/05/2016.
  */
 public class MainWindow extends JFrame {
 
@@ -54,7 +54,7 @@ public class MainWindow extends JFrame {
         splitPane.setContinuousLayout(true);
 
         // Provide minimum sizes for the two components in the split pane
-        Dimension minimumSize = new Dimension(dimension.width / 4, dimension.height / 4);
+        Dimension minimumSize = new Dimension(dimension.width/4, dimension.height/4);
         leftPanel.setMinimumSize(minimumSize);
         rightPanel.setMinimumSize(minimumSize);
     }

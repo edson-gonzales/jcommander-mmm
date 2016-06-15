@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
- * Created by Marcela Barrionuevo on 17/05/2016.
+ * Created by Marcela BARRIONEVO on 17/05/2016.
  */
 public class ToolBar extends JToolBar {
 
