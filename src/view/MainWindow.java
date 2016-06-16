@@ -16,7 +16,6 @@ public class MainWindow extends JFrame {
     private JSplitPane splitPane;
     private PanelContainer leftPanel;
     private PanelContainer rightPanel;
-    private CreateFileButton createFileButton;
 
     public MainWindow(){
 
@@ -34,7 +33,6 @@ public class MainWindow extends JFrame {
         menuBar = new MenuBar();
         toolBar = new ToolBar();
         statusBar = new StatusBar();
-        createFileButton = new CreateFileButton();
 
         this.setTitle("JCommander - Jala");
         this.setSize(dimension.width, dimension.height);
@@ -63,8 +61,7 @@ public class MainWindow extends JFrame {
 
     private void addComponents() {
         add(toolBar, BorderLayout.PAGE_START);
-        add(createFileButton, BorderLayout.SOUTH);
-        //add(statusBar, BorderLayout.SOUTH);
+        add(statusBar, BorderLayout.SOUTH);
         add(splitPane, BorderLayout.CENTER);
     }
 }
